@@ -91,33 +91,33 @@ foreach ($symbols as $symbol) {
     if(isset($_POST['Hit'])) {
 
         $player1->Hit($cards);
-        $PlayerCars = [];
-        array_push($PlayerCars ,$cards[$player1->playerCard]);
-        $_SESSION['PlayerCard'] = $PlayerCars;
 
-        var_dump($_SESSION['PlayerCard']);
-           switch ($cards[$player1->playerCard]->cardSymbol){
-               case 'Spades':
-                   echo "<span>".$cards[$player1->playerCard]->cardName."</span>";
-                   echo '<span>&#9827;</span>';
-                   echo '<br>';
-                   break;
-               case 'Diamonds':
-                   echo "<span>".$cards[$player1->playerCard]->cardName."</span>";
-                   echo '<span style="color: red">&#9830;</span>';
-                   echo '<br>';
-                   break;
-               case 'Clubs':
-                   echo "<span>".$cards[$player1->playerCard]->cardName."</span>";
-                   echo '<span>&#9824;</span>';
-                   echo '<br>';
-                   break;
-               default:
-                   echo "<span>".$cards[$player1->playerCard]->cardName."</span>";
-                   echo '<span style="color: red">&#9829;</span>';
-                   echo '<br>';
-                   break;
-           }
+
+        $_SESSION['PlayerCard'][] = $cards[$player1->playerCard];
+        foreach ($_SESSION['PlayerCard'] as $card) {
+            switch ($card->cardSymbol){
+                case 'Spades':
+                    echo "<span>".$card->cardName."</span>";
+                    echo '<span>&#9827;</span>';
+                    echo '<br>';
+                    break;
+                case 'Diamonds':
+                    echo "<span>".$card->cardName."</span>";
+                    echo '<span style="color: red">&#9830;</span>';
+                    echo '<br>';
+                    break;
+                case 'Clubs':
+                    echo "<span>".$card->cardName."</span>";
+                    echo '<span>&#9824;</span>';
+                    echo '<br>';
+                    break;
+                default:
+                    echo "<span>".$card->cardName."</span>";
+                    echo '<span style="color: red">&#9829;</span>';
+                    echo '<br>';
+                    break;
+            }
+        }
 
     }
     ?>
